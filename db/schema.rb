@@ -10,26 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_002958) do
+ActiveRecord::Schema.define(version: 2020_03_19_190920) do
 
-  create_table "doctors", force: :cascade do |t|
-    t.string "name"
+  create_table "movies", force: :cascade do |t|
+    t.string "title"
+    t.string "genre"
+    t.string "overview"
+    t.integer "blockbuster_rating"
+    t.date "release_date"
   end
 
-  create_table "hospitals", force: :cascade do |t|
-    t.string "name"
+  create_table "rentals", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.datetime "rental_start"
   end
 
-  create_table "nurses", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name"
-    t.integer "hospital_id"
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.integer "doctor_id"
-    t.integer "hospital_id"
-    t.string "name"
-    t.integer "nurse_id"
+    t.string "age"
+    t.integer "credit_card_number"
+    t.string "email"
+    t.integer "phone_number"
+    t.string "password"
   end
 
 end

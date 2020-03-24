@@ -4,8 +4,7 @@ class CreateMovies < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :genre 
       t.string :overview
-      t.float :rating
-      t.float :popularity
+      t.integer :blockbuster_rating
       t.date :release_date 
     end 
   end
