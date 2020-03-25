@@ -47,7 +47,7 @@ def run_application
             b_credit_card = prompt.ask("Please Enter Credit Card Number")
             b_email = prompt.ask("Please Enter Email")
             b_phonenum = prompt.ask("Please Enter Phone Number")
-            b_password = prompt.ask("Please Enter Password")
+            b_password = prompt.mask("Please Enter Password")
 
             User.create(name: b_username, age: b_age, credit_card_number: b_credit_card, email: b_email, phone_number: b_phonenum,password: b_password)
             exit 
@@ -97,7 +97,76 @@ def run_application
         end 
 
         if rent_menu == 'By Blockbuster 2.0 Popular List'
-            puts "hi"
+            top_3 = Movie.all.most_watched_movies
+            top_3.each do |movie|
+                title_info = movie[0]
+                overview_info = movie[1]
+                rec_search = RestClient.get("https://api.themoviedb.org/3/search/movie?api_key=c73ff9db1c1c1d2942d1ad8f49bfba66&language=en-US&query={#{title_info}}&page=1&include_adult=false")
+                movie_data = JSON.parse(rec_search)["results"]
+                
+                    title_info = movie_data[0]["title"]
+                    overview_info = movie_data[0]["overview"] 
+                    rating_info = movie_data[0]["vote_average"]
+                    release_date_info = movie_data[0]["release_date"]
+                    genre_info = movie_data[0]["genre_ids"].map do |genre|
+                        if genre == 28
+                            "Action"
+                        elsif genre == 12
+                            "Adventure"
+                        elsif genre == 16
+                            "Animation"
+                        elsif genre == 35
+                            "Comedy"
+                        elsif genre == 80
+                            "Crime"
+                        elsif genre == 99
+                            "Documentary"
+                        elsif genre == 18
+                            "Drama"
+                        elsif genre == 10751
+                            "Family"
+                        elsif genre == 14
+                            "Fantasy"
+                        elsif genre == 36
+                            "History"
+                        elsif genre == 27
+                            "Horror"
+                        elsif genre == 10402
+                            "Music"
+                        elsif genre == 9648
+                            "Mystery"
+                        elsif genre == 10749
+                            "Romance"
+                        elsif genre == 878
+                            "Science Fiction"
+                        elsif genre == 10770
+                            "TV Movie"
+                        elsif genre == 53
+                            "Thriller"
+                        elsif genre == 10752
+                            "War"
+                        elsif genre == 37
+                            "Western"
+                        end 
+                    
+                    end 
+                 
+                    system("clear")
+                    puts title_info
+                    puts overview_info
+                 
+                    if prompt.yes?('Rent This Movie?')
+                        Movie.create(title: title_info,genre: genre_info,overview: overview_info,blockbuster_rating: rating_info,release_date: release_date_info)
+                        Rental.create(user_id: User.user_exist?(user_name).id, movie_id: Movie.last.id,rental_start: Time.new)
+                        system("clear")
+                        puts "Movie was Rented"
+                        puts "You will have 3 days to watch #{title_info}"
+                        exit  
+                    end 
+                 
+            end 
+             
+             
         elsif rent_menu == 'By Title'
             movie_title = prompt.ask("Please Enter Title of Movie")
             
@@ -165,7 +234,7 @@ def run_application
 
                     if prompt.yes?('Rent This Movie?')
                         Movie.create(title: title_info,genre: genre_info,overview: overview_info,blockbuster_rating: rating_info,release_date: release_date_info)
-                        Rental.create(user_id: User.last.id, movie_id: Movie.last.id,rental_start: Time.new)
+                        Rental.create(user_id: User.user_exist?(user_name).id, movie_id: Movie.last.id,rental_start: Time.new)
                         system("clear")
                         puts "Movie was Rented"
                         puts "You will have 3 days to watch #{title_info}"
@@ -266,7 +335,7 @@ def run_application
 
             if prompt.yes?('Rent This Movie?')
                 Movie.create(title: title_info,genre: genre_info,overview: overview_info,blockbuster_rating: rating_info,release_date: release_date_info)
-                Rental.create(user_id: User.last.id, movie_id: Movie.last.id,rental_start: Time.new)
+                Rental.create(user_id: User.user_exist?(user_name).id, movie_id: Movie.last.id,rental_start: Time.new)
                 system("clear")
                 puts "Movie was Rented"
                 puts "You have 3 days to watch #{title_info}"
@@ -278,9 +347,76 @@ def run_application
 
         
         elsif rent_menu == 'By Blockbuster 2.0 Recomendation for You'
-            puts 'not made yet'
+           
         elsif rent_menu == 'By Blockbuster 2.0 Rating'
-            puts 'not made '
+            top_3 = Movie.all.highest_rated_movies
+            top_3.each do |movie|
+                title_info = movie[0]
+                overview_info = movie[1]
+                rec_search = RestClient.get("https://api.themoviedb.org/3/search/movie?api_key=c73ff9db1c1c1d2942d1ad8f49bfba66&language=en-US&query={#{title_info}}&page=1&include_adult=false")
+                movie_data = JSON.parse(rec_search)["results"]
+                
+                    title_info = movie_data[0]["title"]
+                    overview_info = movie_data[0]["overview"] 
+                    rating_info = movie_data[0]["vote_average"]
+                    release_date_info = movie_data[0]["release_date"]
+                    genre_info = movie_data[0]["genre_ids"].map do |genre|
+                        if genre == 28
+                            "Action"
+                        elsif genre == 12
+                            "Adventure"
+                        elsif genre == 16
+                            "Animation"
+                        elsif genre == 35
+                            "Comedy"
+                        elsif genre == 80
+                            "Crime"
+                        elsif genre == 99
+                            "Documentary"
+                        elsif genre == 18
+                            "Drama"
+                        elsif genre == 10751
+                            "Family"
+                        elsif genre == 14
+                            "Fantasy"
+                        elsif genre == 36
+                            "History"
+                        elsif genre == 27
+                            "Horror"
+                        elsif genre == 10402
+                            "Music"
+                        elsif genre == 9648
+                            "Mystery"
+                        elsif genre == 10749
+                            "Romance"
+                        elsif genre == 878
+                            "Science Fiction"
+                        elsif genre == 10770
+                            "TV Movie"
+                        elsif genre == 53
+                            "Thriller"
+                        elsif genre == 10752
+                            "War"
+                        elsif genre == 37
+                            "Western"
+                        end 
+                    
+                    end 
+                 
+                    system("clear")
+                    puts title_info
+                    puts overview_info
+                 
+                    if prompt.yes?('Rent This Movie?')
+                        Movie.create(title: title_info,genre: genre_info,overview: overview_info,blockbuster_rating: rating_info,release_date: release_date_info)
+                        Rental.create(user_id: User.user_exist?(user_name).id, movie_id: Movie.last.id,rental_start: Time.new)
+                        system("clear")
+                        puts "Movie was Rented"
+                        puts "You will have 3 days to watch #{title_info}"
+                        exit  
+                    end 
+                 
+            end 
         end 
          
     
@@ -302,11 +438,12 @@ def run_application
         end 
 
         if settings_menu == 'Update_Account_Information'
+                
                 User.user_exist?(user_name).update(age: prompt.ask("Please Enter Age"))
                 User.user_exist?(user_name).update(credit_card_number: prompt.ask("Please Enter Credit Card Number"))
                 User.user_exist?(user_name).update(email: prompt.ask("Please Enter Email"))
                 User.user_exist?(user_name).update(phone_number: prompt.ask("Please Enter Phone Number"))
-                User.user_exist?(user_name).update(password: prompt.ask("Please Enter Password"))
+                User.user_exist?(user_name).update(password: prompt.mask("Please Enter Password"))
             puts "Account has been updated"
             
             exit 
