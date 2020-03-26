@@ -26,7 +26,7 @@ class Movie < ActiveRecord::Base
         counts = Hash.new(0)
         movies.each{|title| counts[title] += 1}
         counts.sort_by{|k,v|v}.reverse[0..2]
-        #binding.pry 
+        
     
     end 
 

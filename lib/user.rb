@@ -14,13 +14,20 @@ class User < ActiveRecord::Base
     end 
     
 
-    def update_account 
-        #update
 
-    end 
-
-    def most_watched_genre_for_user
-        #read
+    def fav_genre
+        genres_with_slash = self.movies.map{|movie|movie.genre}
+        no_backslash = genres_with_slash.map{|genre|genre.delete("\"")}
+        no_left_brac = no_backslash.map{|genre|genre.delete("[")}
+        no_right_brac = no_left_brac.map{|genre|genre.delete("]")}
+        genre_arrays = no_right_brac.map{|genre|genre.split(",")}
+        #iterate thro each genre array and collect how many in hash values
+        counts = Hash.new(0)
+        genre_arrays.each do |genre_array|
+            genre_array.map{|genre| counts[genre.strip] += 1}
+               
+        end 
+        counts.sort_by{|k,v|v}.reverse.first     
     end 
 
     def self.user_exist?(user_name)
