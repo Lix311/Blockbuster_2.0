@@ -61,7 +61,7 @@ def run_application
     
     elsif main_log_in == 'Sign-In' 
         system("clear")
-        while true 
+     
         user_name = prompt.ask("Please Enter Username")
         password = prompt.mask("Please Enter Password")
      
@@ -71,9 +71,9 @@ def run_application
             exit 
         elsif User.user_exist?(user_name).password_check(password) == false 
             puts "Wrong Password or Username, Try Again"
-        else 
-            break  
-        end  
+            exit 
+        end 
+         
  
     end 
  
@@ -163,9 +163,9 @@ def run_application
                         system("clear")
                         puts "Movie was Rented"
                         puts "You will have 3 days to watch #{title_info}"
-                        exit  
+                        break  
                     end 
-                 
+                 system("clear")
             end 
              
              
@@ -463,8 +463,9 @@ def run_application
                         system("clear")
                         puts "Movie was Rented"
                         puts "You will have 3 days to watch #{title_info}"
-                        exit  
+                        break 
                     end 
+                system("clear")
                 end 
                  
             
@@ -535,10 +536,11 @@ def run_application
                         system("clear")
                         puts "Movie was Rented"
                         puts "You will have 3 days to watch #{title_info}"
-                        exit  
+                        break
                     end 
                  
             end 
+            system("clear")
         end 
          
     
@@ -559,6 +561,7 @@ def run_application
             set_menu.choice 'Exit'
         end 
 
+        
         if settings_menu == 'Update_Account_Information'
                 
                 User.user_exist?(user_name).update(age: prompt.ask("Please Enter Age"))
@@ -567,8 +570,9 @@ def run_application
                 User.user_exist?(user_name).update(phone_number: prompt.ask("Please Enter Phone Number"))
                 User.user_exist?(user_name).update(password: prompt.mask("Please Enter Password"))
             puts "Account has been updated"
-            
-            exit 
+            puts "Please Log-In Again"
+            system("clear")
+            exit   
     
         elsif settings_menu == "Cancel_Account"
             if prompt.yes?('Are You Sure You Want to Delete This Account?')
@@ -588,7 +592,7 @@ def run_application
         user_rentals.each do |rental|
             rental.rental_expired #this is returning instances and not putsing out anything
         end 
-        
+    
         
     elsif main_menu == 'Exit'
         exit 
@@ -607,7 +611,7 @@ def run_application
     
 
 
-end 
+
 end 
 end 
 
