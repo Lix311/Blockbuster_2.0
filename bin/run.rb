@@ -352,6 +352,12 @@ def run_application
             
 
             top_genre = User.user_exist?(user_name).fav_genre
+            if top_genre == nil 
+                puts "We Dont Know Your Interests"
+                puts "Please Rent More Movies Before We Make Recommendations"
+                exit 
+            end 
+            
             genre = top_genre[0]
                 
                 if genre == "Action"
