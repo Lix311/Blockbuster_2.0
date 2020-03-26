@@ -381,7 +381,7 @@ def run_application
                 elsif genre == "History"
                     genre_id = 36
                 elsif genre == "Horror"
-                    genre_id == 27
+                    genre_id = 27
                 elsif genre == "Music"
                     genre_id = 10402
                 elsif genre == "Mystery"
@@ -401,7 +401,7 @@ def run_application
                 end 
                     
                 
-                rec_search = RestClient.get("https://api.themoviedb.org/3/discover/movie?api_key=c73ff9db1c1c1d2942d1ad8f49bfba66&with_genres=#{genre_id}&sort_by=vote_average.desc&vote_count.gte=10&language=en-US&page=#{1}")
+                rec_search = RestClient.get("https://api.themoviedb.org/3/discover/movie?api_key=c73ff9db1c1c1d2942d1ad8f49bfba66&with_genres=#{genre_id}&sort_by=vote_average.desc&vote_count.gte=10&language=en-US&page=1")
                 movie_data = JSON.parse(rec_search)["results"]
                 
                 movie_data.each_with_index do |movie,index|
