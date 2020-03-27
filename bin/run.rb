@@ -354,9 +354,8 @@ def run_application
             top_genre = User.user_exist?(user_name).fav_genre
             if top_genre == nil 
                 puts "We Dont Know Your Interests"
-                puts "Please Rent More Movies Before We Make Recommendations"
-                exit 
-            end 
+                puts "Please Rent More Movies Before We Make Recommendations" 
+            else 
             
             genre = top_genre[0]
                 
@@ -399,8 +398,7 @@ def run_application
                 elsif genre == "Western"
                     genre_id = 37
                 end 
-                    
-                
+                     
                 rec_search = RestClient.get("https://api.themoviedb.org/3/discover/movie?api_key=c73ff9db1c1c1d2942d1ad8f49bfba66&with_genres=#{genre_id}&sort_by=vote_average.desc&vote_count.gte=10&language=en-US&page=1")
                 movie_data = JSON.parse(rec_search)["results"]
                 
@@ -467,6 +465,7 @@ def run_application
                     end 
                 system("clear")
                 end 
+            end 
                  
             
              

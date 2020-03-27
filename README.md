@@ -395,3 +395,10 @@ It's time to show off your creation to the world! Things you might want to do ar
 * Write a blog post about the project and process.
 
 🎊 Good job on making to the end! 🎊
+Welcome to Blockbuster 2.0 "We're Back in Business Baby"
+This App is Designed to hold a database of users and their movies 
+You can Log-In to your account rent Movies, and view your current Queue
+Once a movie is rented you will have 3 days to watch it, after that, It will expire from your Queue
+Be sure to check out Blockbuster 2.0's Recommendation for You when you rent Movies!
+
+used with The Movie Database API - https://developers.themoviedb.org/3/getting-started/introduction

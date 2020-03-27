@@ -5,10 +5,23 @@ class Rental < ActiveRecord::Base
     def rental_expired
         #delete 
         return_date = self.rental_start + 3.days 
-        if return_date < Time.now 
-            self.delete 
+        no_left = self.movie.genre.delete("]")
+        no_both = no_left.delete("[")
+        no_all = no_both.delete('"')
+
+        
+        if Time.now > return_date
+            puts "Rental #{self.movie.title} has expired"
         else 
-           puts "You have #{return_date.day - Time.now.day} days to watch #{self.movie.title}"
+
+            puts "You Have #{return_date.day - Time.now.day} Days to Watch #{self.movie.title}"
+            puts nil 
+            puts "title: #{self.movie.title}"
+            puts "genre: #{no_all}"
+            puts "overview: #{self.movie.overview}"
+            puts "rating: #{self.movie.blockbuster_rating}"
+            puts "release_date: #{self.movie.release_date}"
+            puts nil 
         end 
     end 
 
