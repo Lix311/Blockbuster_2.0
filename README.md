@@ -2,6 +2,12 @@
 
 Welcome to **Blockbuster 2.0** 🍿, a modern take on the classic movie rental system! This Ruby application allows users to create accounts, log in, and rent movies from a vast selection. Get ready to binge-watch your favorite films with just a few clicks! 🎥🍿
 
+## 🎥 Vimeo Link
+
+You can view the app in action here:
+
+[Blockbuster 2.0 Demo 🎬](https://vimeo.com/manage/videos/438258720)
+
 ## 📋 Requirements
 
 - Ruby 2.7 or higher 🦾
@@ -72,13 +78,3 @@ After logging in, you'll have access to the main menu with options to:
 ### 🍿 Renting a Movie
 
 When you find a movie, its details (title, overview, genre, rating, etc.) will be displayed, and you’ll be prompted to rent it. You have 3 days to watch it—just like a true movie lover! 🎬⏳
-
-## 🎥 Vimeo Link
-
-You can view the app in action here:
-
-[Blockbuster 2.0 Demo 🎬](https://vimeo.com/manage/videos/438258720)
-
-## 📝 License
-
-This project is open-source and available under the [MIT License](LICENSE). 🔓
